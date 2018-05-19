@@ -6,13 +6,10 @@ from datadog import initialize, api, statsd
 
 # get keys from enfironment variables
 SEGMENT_SHARED_SECRET = os.environ['SEGMENT_SHARED_SECRET']
-DATADOG_API_KEY = os.environ['DD_API_KEY']
-DATADOG_APP_KEY = os.environ['DD_APP_KEY']
 
 # initialize datadog
 options = {
-    'api_key': DATADOG_API_KEY,
-    'app_key': DATADOG_APP_KEY
+    'statsd_host': os.getenv('DATADOG_STATSD_HOST', None)
 }
 
 initialize(**options)
