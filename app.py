@@ -19,11 +19,10 @@ initialize(**options)
 
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
-app.logger.info('event: %r', options)
 
 @app.route('/')
 def index():
-    app.logger.info('viewed root route')
+    app.logger.debug('viewed root route')
     return "Segment2Datadog is up and running!"
 
 @app.route('/api/<string:source>', methods=['POST'])
@@ -38,7 +37,7 @@ def segment2datadog(source):
     content = request.get_json(silent=True)
     # increment event counter in datadog
     if content['type'] == 'track':
-        app.logger.info(
+        app.logger.debug(
           '{ event: "%s", userId: "%s" }',
           '-'.join(content['event'].split()),
           content['userId']
